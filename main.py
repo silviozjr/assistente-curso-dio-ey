@@ -123,8 +123,6 @@ def processar_busca_detalhes(frase):
         detalhes = obter_detalhes_estabelecimento(id_estabelecimento)
         resposta = ''
 
-        print(detalhes)
-
         if exibir_fone:
             resposta = resposta + 'Telefone: ' + detalhes['formatted_phone_number']
         if exibir_site:
