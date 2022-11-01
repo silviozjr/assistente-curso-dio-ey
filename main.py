@@ -1,6 +1,7 @@
 import os
 import speech_recognition as sr
 import googlemaps
+from gtts import gTTS
 
 API_KEY = 'Your_GoogleMaps_API_Key'
 
@@ -149,7 +150,9 @@ def obter_detalhes_estabelecimento(id):
     return resp.get('result')
 
 def exibe_ou_fala(texto):
-    #TODO: Adicionar texto-para-fala
+    audio = gTTS(text=texto, lang="pt-BR", slow=False)
+    audio.save("resultado.mp3")
+    os.system("start resultado.mp3")    
     print(texto)
 
 
@@ -163,7 +166,7 @@ while (intencao != SAIR):
     intencao = processar_frase(frase)
     
     if (intencao == PROCURAR_ESTABELECIMENTO):
-        locais_encontrados = ''
+        locais_encontrados = 'Estes são os locais que eu encontrei: '
         for local in locais:
             locais_encontrados = locais_encontrados + local['name'] + '.\n'
         exibe_ou_fala(locais_encontrados)
